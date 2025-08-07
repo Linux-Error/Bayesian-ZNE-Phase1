@@ -1,7 +1,7 @@
 # Bayesian-ZNE-Phase1
 
 This repository contains the complete simulation and execution framework for my research titled:  
-**"A Combination of Bayesian Inference with Zero-Noise Extrapolation for Quantum Error Mitigation"**  
+"A Combination of Bayesian Inference with Zero-Noise Extrapolation for Quantum Error Mitigation"  
 by *Samuel Stryker, Horace Greeley High School*  
 Mentor: Dr. Malcolm Carroll, IBM T.J. Watson Research Center
 
