@@ -8,13 +8,13 @@ Mentor: Dr. Malcolm Carroll, IBM T.J. Watson Research Center
 
 ##  Project Overview
 
-In this project, I developed and evaluated a hybrid quantum error mitigation technique combining **Bayesian inference** with **zero-noise extrapolation (ZNE)**. The approach integrates classically simulated prior distributions with real IBM Quantum hardware measurements to improve the fidelity of extrapolated expectation values.
+In this project, I developed and evaluated a hybrid quantum error mitigation technique combining Bayesian inference with zero-noise extrapolation (ZNE). The approach integrates classically simulated prior distributions with real IBM Quantum hardware measurements to improve the fidelity of extrapolated expectation values.
 
 The main goals were:
-- Improve the **accuracy and stability** of ZNE using Bayesian correction
-- Simulate expectation distributions using **Aer + custom noise models**
-- Run hardware trials on **ibm_kyiv** backend with gate folding
-- Benchmark against noise-free simulations to compute MAE and R²
+- Improve the accuracy and stability of ZNE using Bayesian correction
+- Simulate expectation distributions using Aer + custom noise model to accurately simulate the ibm_kyiv backend
+- Run hardware trials on ibm_kyiv backend with local gate folding
+- Benchmark against noise-free simulations to compute MAE and CI
 
 ##  Repository Contents
 
@@ -22,7 +22,6 @@ The main goals were:
 - `ibm_hardware_runs/`: Runs locally folded circuits on IBM Quantum hardware at λ = 1–9
 - `noise_free_baseline/`: Simulates the same circuit on a noise-free backend for comparison
 - `data/`: Contains CSV results and calibration data
-- `notebooks/` (optional): For future interactive analysis or plots
 
 ## ⚠️ Note on Expectation Values
 
