@@ -3,25 +3,19 @@ from qiskit_aer import AerSimulator, Aer
 import pandas as pd
 
 def noisy_cnot_circuit(n):
-    qc = QuantumCircuit(n, n)  # Create a circuit with `n` qubits
-
-    # Step 1: Apply a Hadamard to the first qubit to create superposition
+    qc = QuantumCircuit(n, n) 
     qc.h(0)
     
-    # Step 2: Apply controlled rotations to introduce bias
     for i in range(1, n):
         qc.cx(0, i)
-        qc.rz((i + 1) * 0.5, i)  # Controlled bias rotations based on qubit index
+        qc.rz((i + 1) * 0.5, i)
     
-    # Step 3: Apply another layer of entanglement
     for i in range(n - 1):
         qc.cx(i, i + 1)
     
-    # Step 4: Add a final biasing layer
     for i in range(n):
-        qc.rx(i * 0.3, i)  # Apply small rotations to each qubit
+        qc.rx(i * 0.3, i)
     
-    # Step 5: Measurement
     qc.measure(range(n), range(n))
     
     return qc
@@ -41,26 +35,17 @@ def calculate_last_qubit_expectation_value(counts, n_qubits):
 n_qubits = 3
 shots = 9000
 
-# Create the circuit
 qc = noisy_cnot_circuit(n_qubits)
-
-# Use AerSimulator
 simulator = AerSimulator()
-
-# Transpile the circuit for the simulator
 transpiled_qc = transpile(qc, simulator)
 
-# Run the simulation
+# Run simulation
 job = simulator.run(transpiled_qc, shots=shots)
 result = job.result()
-
-# Get the measurement counts
 counts = result.get_counts()
 
-# Calculate the expectation value for the last qubit
 expectation_value = calculate_last_qubit_expectation_value(counts, n_qubits)
 
-# Save the result
 results = [{"Last Qubit Expectation Value": expectation_value}]
 
 
