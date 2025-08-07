@@ -6,10 +6,8 @@ from qiskit_aer import AerSimulator
 from qiskit_aer.noise import NoiseModel, depolarizing_error, thermal_relaxation_error
 from qiskit_aer.noise import ReadoutError
 
-# Assuming previous noisy_cnot_circuit, build_scaled_noise_model, and related functions are already defined.
-
 def noisy_cnot_circuit(n):
-    qc = QuantumCircuit(n, n)  # Create a circuit with `n` qubits
+    qc = QuantumCircuit(n, n) 
     qc.h(0)
     for i in range(1, n):
         qc.cx(0, i)
@@ -190,11 +188,9 @@ def amplify_errors(circuit, noise_factor):
         noisy_circuit = noisy_circuit.compose(circuit, inplace=False)
     return noisy_circuit
 
+# Runs the ZNE
 def run_zne_experiment_all_values(circuit, noise_factors, simulator, noise_model, num_runs=20000):
-    """
-    Runs the Zero Noise Extrapolation (ZNE) experiment with the given circuit and noise factors.
-    Returns a dictionary with noise factors as keys and lists of all measured expectation values as values.
-    """
+
     all_expectation_values = {factor: [] for factor in noise_factors}
     
     for noise_factor in noise_factors:
@@ -210,31 +206,24 @@ def run_zne_experiment_all_values(circuit, noise_factors, simulator, noise_model
     
     return all_expectation_values
 
+#Exports to CSV
 def export_all_to_csv(all_expectation_values, filename):
-    """
-    Exports all measured expectation values for each noise factor to a CSV file.
-    """
     with open(filename, mode='w', newline='') as file:
         writer = csv.writer(file)
-        # Write header
         header = ['Noise Factor'] + [f'Measurement {i+1}' for i in range(len(next(iter(all_expectation_values.values()))))]
         writer.writerow(header)
         
-        # Write rows for each noise factor
         for noise_factor, values in all_expectation_values.items():
             row = [noise_factor] + values
             writer.writerow(row)
-
-# Main code
+# Edit params
 n_qubits = 3
 qc = noisy_cnot_circuit(n_qubits)
 simulator = AerSimulator(method='automatic')
-
-# Define noise factors and run ZNE experiment
 noise_factors = [1, 3, 5, 7, 9]
 all_expectation_values = run_zne_experiment_all_values(qc, noise_factors, simulator, noise_model, num_runs=20000)
 
-# Export all values to CSV
 output_filename = 'zne_all_expectation_values_Kyiv_2000.csv'
 export_all_to_csv(all_expectation_values, output_filename)
 print(f'All measured expectation values exported to {output_filename}')
+
