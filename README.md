@@ -23,7 +23,7 @@ The main goals were:
 - `noise_free_baseline/`: Simulates the same circuit on a noise-free backend for comparison
 - `data/`: Contains CSV results and calibration data
 
-## ⚠️ Note on Expectation Values
+##  Note on Expectation Values
 
 The expectation values were calculated using a simplified metric based on all-0 and all-1 outcomes (e.g., `'000'` and `'111'`), uniformly applied across all runs (noise-free, noisy, Bayesian-corrected). This does **not impact the comparative validity** of results, as all error metrics (MAE, R²) were calculated with respect to the same baseline.
 
